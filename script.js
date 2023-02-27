@@ -1,7 +1,7 @@
 /* pieces */
 
 let board = document.getElementById('board');
-let redpieces = document.querySelectorAll('.redpawn')
+const redpieces = document.querySelectorAll('.redpawn')
 const greenpieces = document.querySelectorAll('.greenpawn')
 const yellowpieces = document.querySelectorAll('.yellowpawn')
 const bluepieces = document.querySelectorAll('.bluepawn')
@@ -11,68 +11,44 @@ const bluepieces = document.querySelectorAll('.bluepawn')
 // let greenpiece3 = document.getElementByClass('quad2-pawn3')
 // let greenpiece4 = document.getElementByClass('quad2-pawn4')
 
-// let bluepiece1 = document.getElementByClass('quad3-pawn1')
-// let bluepiece2 = document.getElementByClass('quad3-pawn2')
-// let bluepiece3 = document.getElementByClass('quad3-pawn3')
-// let bluepiece4 = document.getElementByClass('quad3-pawn4')
-
-// let yellowpiece1 = document.getElementByClass('quad4-pawn1')
-// let yellowpiece2 = document.getElementByClass('quad4-pawn2')
-// let yellowpiece3 = document.getElementByClass('quad4-pawn3')
-// let yellowpiece4 = document.getElementByClass('quad4-pawn4')
-
 /* event listeners */
 
 redpieces.forEach((redpiece) => {
-    redpiece.addEventListener('click', startRedPiece)
+    redpiece.addEventListener('click', (e) => startPiece(e,'red'))
 })
 
 greenpieces.forEach((greenpiece) =>{
-    greenpiece.addEventListener('click', startGreenPiece)
+    greenpiece.addEventListener('click', (e) => startPiece(e,'green'))
 })
 
 yellowpieces.forEach((yellowpiece) => {
-    yellowpiece.addEventListener('click', startYellowPiece)
+    yellowpiece.addEventListener('click',(e) => startPiece(e,'yellow'))
 })
 
 bluepieces.forEach((bluepiece) =>{
-    bluepiece.addEventListener('click', startBluePiece)
+    bluepiece.addEventListener('click', (e) => startPiece(e,'blue'))
 })
+
+
 /* functions */
 
-function startRedPiece(piece) {
-    let redStart = document.getElementById('red-start');
-    let gamePiece = piece.target
-    let quadrant = gamePiece.parentNode
+function startPiece(piece,color) {
+    const startContainer = document.getElementById(`${color}-start`);
+    const gamePiece = piece.target
+    const quadrant = gamePiece.parentNode
+    
+    
 
-       quadrant.removeChild(gamePiece)
-       redStart.appendChild(gamePiece)
-
-}
-
-function startGreenPiece(piece) {
-    let greenStart = document.getElementById('green-start');
-    let gamePiece = piece.target
-    let quadrant = gamePiece.parentNode
 
     quadrant.removeChild(gamePiece)
-    greenStart.appendChild(gamePiece)
-}
+    startContainer.appendChild(gamePiece)
 
-function startYellowPiece(piece) {
-    let yellowStart = document.getElementById('yellow-start');
-    let gamePiece = piece.target
-    let quadrant = gamePiece.parentNode
+    startContainer.style.display = 'flex'
+    startContainer.style.justifyContent = 'center'
+    startContainer.style.alignItems = 'center'
+    
+    gamePiece.style.backgroundColor = `${color}`
+    gamePiece.style.position = 'absolute'
+    gamePiece.style.border = '2px solid #fff'
 
-    quadrant.removeChild(gamePiece)
-    yellowStart.appendChild(gamePiece)
-}
-
-function startBluePiece(piece) {
-    let blueStart = document.getElementById('blue-start')
-    let gamepiece = piece.target
-    let quadrant = gamepiece.parentNode
-
-    quadrant.removeChild(gamepiece)
-    blueStart.appendChild(gamepiece)
 }
