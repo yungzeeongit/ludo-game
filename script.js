@@ -5,7 +5,8 @@ const redpieces = document.querySelectorAll('.redpawn')
 const greenpieces = document.querySelectorAll('.greenpawn')
 const yellowpieces = document.querySelectorAll('.yellowpawn')
 const bluepieces = document.querySelectorAll('.bluepawn')
-
+const diceRoler = document.getElementById('dice-btn')
+const diceValue = document.getElementById('dice-el')
 // let greenpiece1 = document.getElementByClass('quad2-pawn1')
 // let greenpiece2 = document.getElementByClass('quad2-pawn2')
 // let greenpiece3 = document.getElementByClass('quad2-pawn3')
@@ -14,34 +15,39 @@ const bluepieces = document.querySelectorAll('.bluepawn')
 /* event listeners */
 
 redpieces.forEach((redpiece) => {
-    redpiece.addEventListener('click', (e) => startPiece(e,'red'))
+    redpiece.addEventListener('click', (e)=>
+            movePiece(e,'red'))
+      
 })
 
 greenpieces.forEach((greenpiece) =>{
-    greenpiece.addEventListener('click', (e) => startPiece(e,'green'))
+    greenpiece.addEventListener('click', (e) =>  movePiece(e,'green'))
 })
 
 yellowpieces.forEach((yellowpiece) => {
-    yellowpiece.addEventListener('click',(e) => startPiece(e,'yellow'))
+    yellowpiece.addEventListener('click',(e) => movePiece(e,'yellow'))
 })
 
 bluepieces.forEach((bluepiece) =>{
-    bluepiece.addEventListener('click', (e) => startPiece(e,'blue'))
+    bluepiece.addEventListener('click', (e) => movePiece(e,'blue'))
 })
+
+diceRoler.addEventListener('click', rollDice)
 
 
 /* functions */
 
-function startPiece(piece,color) {
-    const startContainer = document.getElementById(`${color}-start`);
-    const gamePiece = piece.target
-    const quadrant = gamePiece.parentNode
-    
-    
+function movePiece(piece,color) {
+ 
+   
+   
+        const startContainer = document.getElementById(`${color}-start`);
+        const gamePiece = piece.target
+        const quadrant = gamePiece.parentNode
 
-
-    quadrant.removeChild(gamePiece)
+        quadrant.removeChild(gamePiece)
     startContainer.appendChild(gamePiece)
+
 
     startContainer.style.display = 'flex'
     startContainer.style.justifyContent = 'center'
@@ -50,5 +56,24 @@ function startPiece(piece,color) {
     gamePiece.style.backgroundColor = `${color}`
     gamePiece.style.position = 'absolute'
     gamePiece.style.border = '2px solid #fff'
+    }
+   
+    function movePawn(){
+           
+    }
+    
 
-}
+
+    
+
+  
+
+
+
+function rollDice() {
+  const diceArr = [1,2,3,4,5,6]
+  const randomIndex = Math.floor(Math.random() * diceArr.length)
+  const dice = diceArr[randomIndex]
+  diceValue.textContent = `you got a ${dice}!`
+  console.log(dice)
+} 
