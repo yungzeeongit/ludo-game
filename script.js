@@ -8,6 +8,9 @@ const yellowpieces = document.querySelectorAll('.yellowpawn')
 const bluepieces = document.querySelectorAll('.bluepawn')
 const diceRoler = document.getElementById('dice-btn')
 const diceValue = document.getElementById('dice-el')
+let currentTurn = 0
+let rolls = 0
+let quadrant
 // let greenpiece1 = document.getElementByClass('quad2-pawn1')
 // let greenpiece2 = document.getElementByClass('quad2-pawn2')
 // let greenpiece3 = document.getElementByClass('quad2-pawn3')
@@ -43,15 +46,17 @@ diceRoler.addEventListener('click', rollDice)
 function movePiece(piece,color) {
         const startContainer = document.getElementById(`${color}-start`);
         const gamePiece = piece.target
-        const quadrant = gamePiece.parentNode
+        
         
        const jailBreaker = Number(document.getElementById('dice-el').textContent)
-          console.log(jailBreaker)
+       
 
     if(jailBreaker === 6 ){
+        quadrant = gamePiece.parentNode
         quadrant.removeChild(gamePiece)
         startContainer.appendChild(gamePiece)
-    
+         
+        
         
         startContainer.style.display = 'flex'
         startContainer.style.justifyContent = 'center'
@@ -60,9 +65,13 @@ function movePiece(piece,color) {
         gamePiece.style.backgroundColor = `${color}`
         gamePiece.style.position = 'absolute'
         gamePiece.style.border = '2px solid #fff'
+        quadrant.classList.remove('active')
+        piece.target.parentNode.classList.add('active')
+
     }
-    diceValue.textContent = 0
-    
+    diceValue.textContent = ''
+   
+   
     }
 
    
@@ -71,8 +80,42 @@ function rollDice(){
 const randomIndex = Math.floor(Math.random() * diceArr.length)
 const dice = diceArr[randomIndex]
   diceValue.textContent = `${dice}`
-  console.log(dice)
+  rolls++
+  if (rolls === 2) {
+    handleTurn()
+   
+  }
 } 
+
+function handleTurn() {
+   
+   
+   
+console.log(rolls)
+        if(rolls === 2){
+            currentTurn = (currentTurn + 1) % 4
+            rolls = 0
+          }
+          console.log(currentTurn)
+
+        switch (currentTurn) {
+            case 0:
+              quadrant = document.querySelector('.piece1 > .pawns');
+              break;
+            case 1:
+              quadrant = document.querySelector('.piece3 > .pawns');
+              break;
+            case 2:
+              quadrant = document.querySelector('.piece9 > .pawns');
+              break;
+            case 3:
+              quadrant = document.querySelector('.piece7 > .pawns');
+              break;
+          }
+          console.log(quadrant)
+          console.log('i am running')
+    }
+
 
 
 

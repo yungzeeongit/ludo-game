@@ -1,105 +1,91 @@
 *{
-    padding: 0;
     margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
 body{
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #fff;
+    width:  80%;
     border:5px solid brown;
-    width: 55%;
+
 }
 
 .container{
     display: grid;
-    grid-template: 1fr 1fr/ 1fr 1fr ;
     width: 100%;
-    height: 90vh;
-    position: relative;
+    height:100vh;
+grid-template-columns: 2fr 1fr 2fr;
+grid-template-rows: 2fr 1.5fr 2fr;
 }
 
-.player{
-    position: relative;
-   
-    width: 100%;
-    height: 100%;
+.piece8,.piece2{
+    display: grid;
+    grid-template-rows: 6 1fr;
 }
 
-.home{
-    width: 80%;
-    height: 75%;
+.piece4,.piece6{
+    display: grid;
+    grid-template-rows: 3 1fr;
+}
+
+.row-container-flat{
+    display: grid;
+    grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.row-container, .row-container div,.row-container-flat,.row-container-flat div{
     border: 1px solid #000;
-    display: flex;
-     justify-content: center;
-     align-items: center;
-}
-.player1 .home{
-    background-color: blue;
+    background-color: #fff;
 }
 
-.player2 .home{
-    background-color: yellow;
-    position: absolute;
-    right: 0;
+
+.row-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+}
+.piece5{color: #000;
+    padding-top: 20px;
+     text-align: center;
+     font-size:2rem;
 }
 
-.player3 .home{
+.piece6 .row3> div:nth-of-type(5),.piece6 .row2 div:nth-of-type(n+1):nth-of-type(-n+5),.piece9{
+    background-color:yellow;
+}
+
+.piece4 .row1 > div:nth-of-type(2),.piece4 .row2 > div:nth-of-type(n+2):nth-of-type(-n+6),.piece1{
     background-color: red;
-    position: absolute;
-    bottom: 0;
 }
 
-.player4 .home{
-    background-color: green;
-    position: absolute;
-    bottom: 0;
-    right: 0;
+.piece2 div .tbc,.piece3{
+    background-color:green;
 }
 
-.piece{
+.piece8 div .tbc,.piece7{
+    background-color: rgba(0, 0, 255, 0.863);
+}
+.piece5{
+    background-color: gray;
+}
+
+
+.pawn{
     background-color: #000;
     border-radius: 50%;
     border: 2px solid #fff;
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
 }
 
-.game-space {
-    border-collapse: collapse;
-  }
-  
-  .game-space td {
-    width: 50px;
-    height: 50px;
-    border: 1px solid #333; /* Change the border color as per your design */
-  }
+.pawn:hover{
+cursor: pointer;
+}
 
-  table{background-color: #fff;}
-  .player1 table{
-    position: absolute;
-    left: 0;
-    bottom: -25%;
-    width: 80%;
-  }
 
-  .player2 table {
-    position: absolute;
-    top: 0;
-    left: -20%;
-  }
-
-  .player3 table{
-    position: absolute;
-    bottom: 0;
-    right: -20%;
-    height: 10%;
-  }
-
-  .player4 table{
-    position: absolute;
-    right: 0;
-    top: -27%;
-    width: 80%;
-    height: 2%;
-  }
+.pawns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 25%;
+}
