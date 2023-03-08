@@ -52,7 +52,7 @@ function movePiece(piece,color) {
        
 
     if(jailBreaker === 6 ){
-        quadrant = gamePiece.parentNode
+        // quadrant = gamePiece.parentNode
         quadrant.removeChild(gamePiece)
         startContainer.appendChild(gamePiece)
          
@@ -65,10 +65,28 @@ function movePiece(piece,color) {
         gamePiece.style.backgroundColor = `${color}`
         gamePiece.style.position = 'absolute'
         gamePiece.style.border = '2px solid #fff'
-        quadrant.classList.remove('active')
-        piece.target.parentNode.classList.add('active')
+        // quadrant.classList.remove('active')
+        // piece.target.parentNode.classList.add('active')
 
     }
+    else {
+        const quadSelector = `.${color}pawn[data-quadrant="${currentTurn}"]`;
+        const targetSquares = quadrant.querySelectorAll(quadSelector);
+    
+        if (!targetSquares.length) {
+          return;
+        }
+    
+        const currentSquare = gamePiece.parentNode;
+        const currentSquareIndex = Array.from(targetSquares).indexOf(currentSquare);
+        const nextSquareIndex = currentSquareIndex + jailBreaker;
+    
+        if (nextSquareIndex < targetSquares.length) {
+          const nextSquare = targetSquares[nextSquareIndex];
+          nextSquare.appendChild(gamePiece);
+        }
+      }
+    
     diceValue.textContent = ''
    
    
@@ -112,7 +130,7 @@ console.log(rolls)
               quadrant = document.querySelector('.piece7 > .pawns');
               break;
           }
-          console.log(quadrant)
+               console.log(quadrant)
           console.log('i am running')
     }
 
